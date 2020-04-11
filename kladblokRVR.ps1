@@ -9,3 +9,5 @@ New-AzResourceGroup -Name $ResourceGroupName -Tag @{project='RVR.PersonalDSC'} -
 New-AzResourceGroupDeployment -ResourceGroupName $ResourceGroupName -TemplateFile $(Join-Path -Path $TemplatePath -ChildPath 'AutomationAccount.json')
 
 testing 
+more tests
+allalal
