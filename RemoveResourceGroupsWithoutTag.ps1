@@ -1,5 +1,5 @@
 # Get all the resource groups
-$colResGroup = Get-AzResourceGroup
+$colResGroup = Get-AzureRmResourceGroup
 
 # remove the resource groups
-$colResGroup | Where-Object {$_.Tags -eq $null} | Remove-AzResourceGroup -Force 
+$colResGroup | Where-Object {$_.Tags -eq $null} | Remove-AzureRmResourceGroup -Force 

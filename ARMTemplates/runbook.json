@@ -1,0 +1,32 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "automationAccountName": {
+            "type": "string",
+            "metadata": {
+                "description": "Specify the name of your Automation Account"
+            }
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "name": "[concat(parameters('automationAccountName'), '/', 'RemoveUnTaggedResGroups')]",
+            "type": "Microsoft.Automation/automationAccounts/runbooks",
+            "apiVersion": "2018-06-30",
+            "properties": {
+                "description": "Remove resource groups without tags",
+                "logVerbose": false,
+                "logProgress": false,
+                "runbookType": "PowerShell",
+                "publishContentLink": {
+                    "uri": "https://raw.githubusercontent.com/robertreems/RVR.personalDSC/master/RemoveResourceGroupsWithoutTag.ps1",
+                    "version": "1.0"
+                }
+            },
+            "location": "westeurope",
+            "tags": {}
+        }
+    ]
+}
