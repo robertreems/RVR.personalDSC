@@ -12,6 +12,29 @@
     "variables": {},
     "resources": [
         {
+            "type": "Microsoft.Automation/automationAccounts/modules",
+            "apiVersion": "2015-10-31",
+            "name": "[concat(parameters('automationAccountName'), '/', 'Az.Accounts')]",
+            "properties": {
+                "contentLink": {
+                    "uri" : "https://www.powershellgallery.com/api/v2/package/Az.Accounts/1.7.4"
+                }
+            }
+        },
+
+        {
+            "type": "Microsoft.Automation/automationAccounts/modules",
+            "apiVersion": "2015-10-31",
+            "name": "[concat(parameters('automationAccountName'), '/', 'Az.Resources')]",
+            
+            "properties": {
+                "contentLink": {
+                    "uri" : "https://www.powershellgallery.com/api/v2/package/Az.Resources/1.13.0"
+                }
+            }
+        },
+
+        {
             "name": "[concat(parameters('automationAccountName'), '/', 'RemoveUnTaggedResGroups')]",
             "type": "Microsoft.Automation/automationAccounts/runbooks",
             "apiVersion": "2018-06-30",
