@@ -22,5 +22,4 @@ while(!($connectionResult) -And ($logonAttempt -le 10))
 $colResGroup = Get-AZResourceGroup
 
 # remove the resource groups
-$colResGroup 
-# todo
+$colResGroup | ?{$_.Tags.Count -eq 0 } | Remove-AzResourceGroup -Force
