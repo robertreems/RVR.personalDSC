@@ -50,6 +50,21 @@
             },
             "location": "westeurope",
             "tags": {}
+        },
+
+        {
+            "type": "Microsoft.Automation/automationAccounts/jobSchedules",
+            "apiVersion": "2015-10-31",
+            "name": "[concat(parameters('automationAccountName'), '/2e9e5646-34bb-4aa0-b3fb-cedc5c68c5ee')]",
+            "properties": {
+                "runbook": {
+                    "name": "RemoveUnTaggedResGroups"
+                },
+                "schedule": {
+                    "name": "Nightly"
+                }
+            }
         }
+
     ]
 }
