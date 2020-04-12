@@ -8,3 +8,5 @@ New-AzResourceGroup -Name $ResourceGroupName -Tag @{project='RVR.PersonalDSC'} -
 # Deploy Automation account
 New-AzResourceGroupDeployment -ResourceGroupName $ResourceGroupName -TemplateFile $(Join-Path -Path $TemplatePath -ChildPath 'AutomationAccount.json')
 
+# runbook stuff
+new-AzResourceGroupDeployment -ResourceGroupName 'RVR1' -TemplateFile $(Join-Path -Path $TemplatePath -ChildPath 'runbook.json') -automationAccountName 'MyAutomationAccount'
