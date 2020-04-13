@@ -9,4 +9,13 @@ New-AzResourceGroup -Name $ResourceGroupName -Tag @{project='RVR.PersonalDSC'} -
 New-AzResourceGroupDeployment -ResourceGroupName $ResourceGroupName -TemplateFile $(Join-Path -Path $TemplatePath -ChildPath 'AutomationAccount.json')
 
 # runbook stuff
-new-AzResourceGroupDeployment -ResourceGroupName 'RVR1' -TemplateFile $(Join-Path -Path $TemplatePath -ChildPath 'runbook.json') -automationAccountName 'MyAutomationAccount'
+new-AzResourceGroupDeployment `
+    -ResourceGroupName 'RVR1' `
+    -TemplateFile $(Join-Path -Path $TemplatePath -ChildPath 'runbook.json') `
+    -automationAccountName 'MyAutomationAccount' `
+    -scheduleStartDateTime "$(get-date -Format 'yyyy-MM-dd')T21:59:10.4846451Z"
+
+
+[Xml.XmlConvert]::ToString((get-date -Hour 23 -Minute 59),[Xml.XmlDateTimeSerializationMode]::Utc)
+
+"$(get-date -Format 'yyyy-MM-dd')T21:59:10.4846451Z"

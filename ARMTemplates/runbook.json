@@ -7,6 +7,12 @@
             "metadata": {
                 "description": "Specify the name of your Automation Account"
             }
+        },
+        "scheduleStartDateTime": {
+            "type": "string",
+            "metadata": {
+                "description": "Specify the startime of the schedule"
+            }
         }
     },
     "variables": {},
@@ -53,6 +59,19 @@
         },
 
         {
+            "type": "Microsoft.Automation/automationAccounts/schedules",
+            "apiVersion": "2015-10-31",
+            "name": "[concat(parameters('automationAccountName'), '/MidNight')]",
+            "properties": {
+                "startTime": "[parameters('scheduleStartDateTime')]",
+                "expiryTime": "9999-12-31T23:59:59.9999999+00:00",
+                "interval": 1,
+                "frequency": "Day",
+                "timeZone": "Europe/Amsterdam"
+            }
+        },
+
+        {
             "type": "Microsoft.Automation/automationAccounts/jobSchedules",
             "apiVersion": "2015-10-31",
             "name": "[concat(parameters('automationAccountName'), '/2e9e5646-34bb-4aa0-b3fb-cedc5c68c5ee')]",
@@ -61,7 +80,7 @@
                     "name": "RemoveUnTaggedResGroups"
                 },
                 "schedule": {
-                    "name": "Nightly"
+                    "name": "MidNight"
                 }
             }
         }
