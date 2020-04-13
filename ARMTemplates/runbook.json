@@ -27,19 +27,16 @@
                 }
             }
         },
-
         {
             "type": "Microsoft.Automation/automationAccounts/modules",
             "apiVersion": "2015-10-31",
             "name": "[concat(parameters('automationAccountName'), '/', 'Az.Resources')]",
-            
             "properties": {
                 "contentLink": {
                     "uri" : "https://www.powershellgallery.com/api/v2/package/Az.Resources/1.13.0"
                 }
             }
         },
-
         {
             "name": "[concat(parameters('automationAccountName'), '/', 'RemoveUnTaggedResGroups')]",
             "type": "Microsoft.Automation/automationAccounts/runbooks",
@@ -57,11 +54,10 @@
             "location": "westeurope",
             "tags": {}
         },
-
         {
+            "name": "[concat(parameters('automationAccountName'), '/MidNight')]",
             "type": "Microsoft.Automation/automationAccounts/schedules",
             "apiVersion": "2015-10-31",
-            "name": "[concat(parameters('automationAccountName'), '/MidNight')]",
             "properties": {
                 "startTime": "[parameters('scheduleStartDateTime')]",
                 "expiryTime": "9999-12-31T23:59:59.9999999+00:00",
@@ -70,11 +66,14 @@
                 "timeZone": "Europe/Amsterdam"
             }
         },
-
         {
+            "name": "[concat(parameters('automationAccountName'), '/2e9e5646-34bb-4aa0-b3fb-cedc5c68c5e2')]",
             "type": "Microsoft.Automation/automationAccounts/jobSchedules",
             "apiVersion": "2015-10-31",
-            "name": "[concat(parameters('automationAccountName'), '/2e9e5646-34bb-4aa0-b3fb-cedc5c68c5ee')]",
+            "dependsOn": [
+                "MidNight",
+                "RemoveUnTaggedResGroups"
+            ],
             "properties": {
                 "runbook": {
                     "name": "RemoveUnTaggedResGroups"
@@ -84,6 +83,5 @@
                 }
             }
         }
-
     ]
 }
